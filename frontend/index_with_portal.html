@@ -1,0 +1,43 @@
+// Main index.html file that integrates the communication portal with the existing website
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Academy Basketball Program - Gallatin, TN</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="portal_integration_styles.css">
+    <link rel="stylesheet" href="auth_styles.css">
+    <link rel="stylesheet" href="messaging_styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react-router-dom@5.3.0/umd/react-router-dom.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/date-fns@2.28.0/index.js"></script>
+    
+    <!-- Application Scripts -->
+    <script src="auth_system.js"></script>
+    <script src="auth_frontend.js"></script>
+    <script src="messaging_system.js"></script>
+    <script src="messaging_frontend.js"></script>
+    <script src="portal_integration.js"></script>
+    
+    <script>
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            ReactDOM.render(
+                React.createElement(CommunicationPortalIntegration),
+                document.getElementById('root')
+            );
+        });
+    </script>
+</body>
+</html>
