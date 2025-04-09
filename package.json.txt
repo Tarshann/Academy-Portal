@@ -4,9 +4,28 @@
   "description": "Communication portal for The Academy basketball program",
   "main": "backend/server.js",
   "scripts": {
-    "start": "node backend/server.js"
+    "start": "node backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^4.1.0",
+    "mongoose": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0"
   },
   "engines": {
-    "node": "14.x"
-  }
+    "node": "16.x"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongodb",
+    "communication",
+    "portal"
+  ],
+  "author": "The Academy",
+  "license": "ISC"
 }
