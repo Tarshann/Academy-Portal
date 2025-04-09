@@ -1,71 +1,330 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Academy Communication Portal</title>
-  <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      margin: 0; 
-      padding: 0; 
-      background-color: #000; 
-      color: #fff; 
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    header {
-      background-color: #0a3161;
-      padding: 20px 0;
-      text-align: center;
-    }
-    h1 {
-      color: #fff;
-      margin: 0;
-    }
-    .content {
-      padding: 40px 20px;
-      text-align: center;
-    }
-    .card {
-      background-color: #111;
-      border-radius: 5px;
-      padding: 20px;
-      margin-top: 30px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .btn {
-      display: inline-block;
-      background-color: #0a3161;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 20px;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="auth_styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>THE ACADEMY</h1>
-      <p>Communication Portal</p>
-    </div>
-  </header>
+  <div class="basketball-pattern"></div>
   
-  <div class="container">
-    <div class="content">
-      <h2>Welcome to The Academy's Communication Portal</h2>
-      <p>Your central hub for team communication, announcements, and file sharing.</p>
-      
-      <div class="card">
-        <h3>Test Deployment Successful!</h3>
-        <p>The basic website is now working correctly. We're ready to implement the full communication portal functionality.</p>
-        <a href="#" class="btn">Continue to Portal</a>
+  <main id="app">
+    <!-- Authentication Section -->
+    <section id="auth-container">
+      <div class="auth-wrapper">
+        <div class="auth-branding">
+          <div class="logo-container">
+            <h1>THE ACADEMY</h1>
+            <p>Communication Portal</p>
+          </div>
+          <div class="auth-image"></div>
+        </div>
+        
+        <div class="auth-forms">
+          <!-- Login Form -->
+          <div id="login-container">
+            <div class="auth-container login-container">
+              <div class="auth-header">
+                <h2>Welcome Back</h2>
+                <p>Sign in to access The Academy Communication Portal</p>
+              </div>
+              <form id="login-form" class="auth-form">
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" id="login-password" name="password" required>
+                  <span class="password-toggle" onclick="togglePasswordVisibility('login-password', this)">Show</span>
+                </div>
+                <div class="form-options">
+                  <div class="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me">Remember me</label>
+                  </div>
+                  <a href="#" class="forgot-password" onclick="showForgotPassword()">Forgot Password?</a>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Sign In</button>
+                </div>
+                <div class="auth-footer">
+                  <p>Don't have an account? <a href="#" onclick="showRegistration()">Register Now</a></p>
+                </div>
+              </form>
+              <div id="login-message" class="auth-message"></div>
+            </div>
+          </div>
+          
+          <!-- Registration Form -->
+          <div id="registration-container" class="hidden">
+            <div class="auth-container register-container">
+              <div class="auth-header">
+                <h2>Create Account</h2>
+                <p>Join The Academy Communication Portal</p>
+              </div>
+              <div class="registration-steps">
+                <div class="step active" id="step-1">Step 1: Basic Info</div>
+                <div class="step" id="step-2">Step 2: Additional Info</div>
+                <div class="step" id="step-3">Step 3: Complete</div>
+              </div>
+              <form id="registration-form" class="auth-form">
+                <div class="form-step" id="registration-step-1">
+                  <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="reg-name" name="name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="reg-email" name="email" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="reg-phone" name="phone" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="reg-password" name="password" required>
+                    <span class="password-toggle" onclick="togglePasswordVisibility('reg-password', this)">Show</span>
+                    <div class="password-strength">
+                      <div class="strength-meter"></div>
+                      <p class="strength-text">Password strength: <span>Weak</span></p>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="reg-confirm-password" name="confirm-password" required>
+                  </div>
+                  <div class="form-group">
+                    <button type="button" class="btn btn-primary" onclick="nextRegistrationStep(1)">Continue</button>
+                  </div>
+                </div>
+                
+                <div class="form-step hidden" id="registration-step-2">
+                  <div class="form-group">
+                    <label for="role">I am a:</label>
+                    <select id="reg-role" name="role">
+                      <option value="parent">Parent</option>
+                      <option value="player">Player</option>
+                      <option value="coach">Coach</option>
+                    </select>
+                  </div>
+                  <div class="form-group parent-field">
+                    <label for="child-name">Child's Name</label>
+                    <input type="text" id="reg-child-name" name="childName">
+                  </div>
+                  <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="reg-address" name="address">
+                  </div>
+                  <div class="form-group">
+                    <label for="shirt-size">Shirt Size</label>
+                    <select id="reg-shirt-size" name="shirtSize">
+                      <option value="">Select Size</option>
+                      <option value="YS">Youth Small</option>
+                      <option value="YM">Youth Medium</option>
+                      <option value="YL">Youth Large</option>
+                      <option value="S">Adult Small</option>
+                      <option value="M">Adult Medium</option>
+                      <option value="L">Adult Large</option>
+                      <option value="XL">Adult XL</option>
+                      <option value="XXL">Adult XXL</option>
+                    </select>
+                  </div>
+                  <div class="form-group buttons-group">
+                    <button type="button" class="btn btn-secondary" onclick="prevRegistrationStep(2)">Back</button>
+                    <button type="button" class="btn btn-primary" onclick="nextRegistrationStep(2)">Continue</button>
+                  </div>
+                </div>
+                
+                <div class="form-step hidden" id="registration-step-3">
+                  <div class="summary-container">
+                    <h3>Registration Summary</h3>
+                    <div id="registration-summary"></div>
+                  </div>
+                  <div class="terms-container">
+                    <div class="form-check">
+                      <input type="checkbox" id="terms-agree" name="terms-agree" required>
+                      <label for="terms-agree">I agree to the <a href="#" onclick="showTerms()">Terms and Conditions</a></label>
+                    </div>
+                  </div>
+                  <div class="form-group buttons-group">
+                    <button type="button" class="btn btn-secondary" onclick="prevRegistrationStep(3)">Back</button>
+                    <button type="submit" class="btn btn-primary">Complete Registration</button>
+                  </div>
+                </div>
+              </form>
+              <div id="registration-message" class="auth-message"></div>
+              <div class="auth-footer step-1-3">
+                <p>Already have an account? <a href="#" onclick="showLogin()">Sign In</a></p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Forgot Password Form -->
+          <div id="forgot-password-container" class="hidden">
+            <div class="auth-container forgot-password-container">
+              <div class="auth-header">
+                <h2>Reset Password</h2>
+                <p>Enter your email to receive a password reset link</p>
+              </div>
+              <form id="forgot-password-form" class="auth-form">
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="forgot-email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Send Reset Link</button>
+                </div>
+                <div class="auth-footer">
+                  <p><a href="#" onclick="showLogin()">Back to Login</a></p>
+                </div>
+              </form>
+              <div id="forgot-password-message" class="auth-message"></div>
+            </div>
+          </div>
+          
+          <!-- Reset Password Form -->
+          <div id="reset-password-container" class="hidden">
+            <div class="auth-container reset-password-container">
+              <div class="auth-header">
+                <h2>Create New Password</h2>
+                <p>Enter your new password below</p>
+              </div>
+              <form id="reset-password-form" class="auth-form">
+                <div class="form-group">
+                  <label for="password">New Password</label>
+                  <input type="password" id="reset-password" name="password" required>
+                  <span class="password-toggle" onclick="togglePasswordVisibility('reset-password', this)">Show</span>
+                  <div class="password-strength">
+                    <div class="strength-meter"></div>
+                    <p class="strength-text">Password strength: <span>Weak</span></p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="confirm-password">Confirm New Password</label>
+                  <input type="password" id="reset-confirm-password" name="confirm-password" required>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Reset Password</button>
+                </div>
+              </form>
+              <div id="reset-password-message" class="auth-message"></div>
+            </div>
+          </div>
+          
+          <!-- Pending Approval Message -->
+          <div id="pending-approval-container" class="hidden">
+            <div class="auth-container pending-approval-container">
+              <div class="auth-header">
+                <h2>Registration Successful!</h2>
+              </div>
+              <div class="pending-message">
+                <div class="icon-container">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <p>Your account is pending approval by an administrator.</p>
+                <p>You will receive an email notification once your account has been approved.</p>
+                <p>Thank you for your patience!</p>
+              </div>
+              <div class="auth-footer">
+                <p><a href="#" onclick="showLogin()">Back to Login</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</body>
-</html>
+    </section>
+    
+    <!-- Dashboard Section (Hidden until logged in) -->
+    <section id="dashboard-container" class="hidden">
+      <!-- Dashboard content will be loaded here after authentication -->
+    </section>
+  </main>
+
+  <script src="auth_frontend.js" type="module"></script>
+  <script>
+    // Navigation between auth forms
+    function showLogin() {
+      document.getElementById('login-container').classList.remove('hidden');
+      document.getElementById('registration-container').classList.add('hidden');
+      document.getElementById('forgot-password-container').classList.add('hidden');
+      document.getElementById('reset-password-container').classList.add('hidden');
+      document.getElementById('pending-approval-container').classList.add('hidden');
+    }
+
+    function showRegistration() {
+      document.getElementById('login-container').classList.add('hidden');
+      document.getElementById('registration-container').classList.remove('hidden');
+      document.getElementById('forgot-password-container').classList.add('hidden');
+      document.getElementById('reset-password-container').classList.add('hidden');
+      document.getElementById('pending-approval-container').classList.add('hidden');
+    }
+
+    function showForgotPassword() {
+      document.getElementById('login-container').classList.add('hidden');
+      document.getElementById('registration-container').classList.add('hidden');
+      document.getElementById('forgot-password-container').classList.remove('hidden');
+      document.getElementById('reset-password-container').classList.add('hidden');
+      document.getElementById('pending-approval-container').classList.add('hidden');
+    }
+
+    // Registration multi-step form navigation
+    function nextRegistrationStep(currentStep) {
+      // Validate current step
+      if (currentStep === 1) {
+        const name = document.getElementById('reg-name').value;
+        const email = document.getElementById('reg-email').value;
+        const phone = document.getElementById('reg-phone').value;
+        const password = document.getElementById('reg-password').value;
+        const confirmPassword = document.getElementById('reg-confirm-password').value;
+        
+        if (!name || !email || !phone || !password || !confirmPassword) {
+          const messageContainer = document.getElementById('registration-message');
+          messageContainer.innerHTML = '<div class="error-message">Please fill in all required fields</div>';
+          messageContainer.classList.add('visible');
+          return;
+        }
+        
+        if (password !== confirmPassword) {
+          const messageContainer = document.getElementById('registration-message');
+          messageContainer.innerHTML = '<div class="error-message">Passwords do not match</div>';
+          messageContainer.classList.add('visible');
+          return;
+        }
+        
+        // Hide message if validation passes
+        const messageContainer = document.getElementById('registration-message');
+        messageContainer.innerHTML = '';
+        messageContainer.classList.remove('visible');
+      }
+      
+      if (currentStep === 2) {
+        // Update registration summary
+        const name = document.getElementById('reg-name').value;
+        const email = document.getElementById('reg-email').value;
+        const phone = document.getElementById('reg-phone').value;
+        const role = document.getElementById('reg-role').value;
+        const childName = document.getElementById('reg-child-name').value;
+        const address = document.getElementById('reg-address').value;
+        const shirtSize = document.getElementById('reg-shirt-size').value;
+        
+        const roleText = role.charAt(0).toUpperCase() + role.slice(1);
+        
+        let summaryHTML = `
+          <div class="summary-item">
+            <span class="summary-label">Name:</span>
+            <span class="summary-value">${name}</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Email:</span>
+            <span class="summary-value">${email}</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Phone:</span>
+            <span class="summary-value">${phone}</span>
+          </div>
+          
