@@ -3,8 +3,12 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Log directory structure for debugging
+console.log('Current directory:', __dirname);
+console.log('Files in current directory:', require('fs').readdirSync(__dirname));
+
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 // Simple test route
 app.get('/api/test', (req, res) => {
