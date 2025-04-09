@@ -2,10 +2,12 @@
   "name": "academy-portal",
   "version": "1.0.0",
   "description": "Communication portal for The Academy basketball program",
+  "engines": {
+    "node": "16.x"
+  },
   "main": "backend/server.js",
   "scripts": {
-    "start": "node backend/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node backend/server.js"
   },
   "dependencies": {
     "express": "^4.17.1",
@@ -15,17 +17,5 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0"
-  },
-  "engines": {
-    "node": "16.x"
-  },
-  "keywords": [
-    "node",
-    "express",
-    "mongodb",
-    "communication",
-    "portal"
-  ],
-  "author": "The Academy",
-  "license": "ISC"
+  }
 }
