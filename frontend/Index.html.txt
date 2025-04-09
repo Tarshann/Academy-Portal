@@ -10,14 +10,23 @@
       margin: 0;
       padding: 20px;
       text-align: center;
+      background-color: #000;
+      color: #fff;
     }
     h1 {
-      color: navy;
+      color: #0a3161;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>The Academy Communication Portal</h1>
-  <p>Welcome to The Academy's communication portal. This site is currently under development.</p>
+  <div class="container">
+    <h1>The Academy Communication Portal</h1>
+    <p>Welcome to The Academy's communication portal. This site is currently under development.</p>
+  </div>
 </body>
 </html>
