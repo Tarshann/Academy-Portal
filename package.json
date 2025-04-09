@@ -4,9 +4,9 @@
   "engines": {
     "node": "16.x"
   },
-  "main": "backend/server.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node backend/server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.17.1"
