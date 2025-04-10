@@ -2,14 +2,21 @@
   "name": "academy-portal",
   "version": "1.0.0",
   "description": "Communication portal for The Academy basketball program",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
   "engines": {
     "node": "16.x"
   },
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^4.1.0",
+    "mongoose": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "socket.io": "^4.1.3"
   }
 }
