@@ -1,0 +1,15 @@
+{
+  "name": "academy-portal-simple",
+  "version": "1.0.0",
+  "description": "Simple communication portal for The Academy basketball program",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
