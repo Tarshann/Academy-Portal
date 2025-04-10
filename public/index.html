@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Academy Communication Portal</title>
+    <style>
+        /* Inline critical CSS to ensure the page is never plain */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
+        .header {
+            background-color: #0a2e5c;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: #fff;
+        }
+        .header p {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            color: #ccc;
+        }
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        .welcome-message {
+            margin-bottom: 3rem;
+        }
+        .welcome-message h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .welcome-message p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .deployment-message {
+            background-color: #111;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .deployment-message h3 {
+            color: #4CAF50;
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+        .btn-primary {
+            display: inline-block;
+            background-color: #1e5799;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #3071a9;
+        }
+    </style>
+    <!-- Link to external CSS files -->
+    <link rel="stylesheet" href="/css/auth_styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1>THE ACADEMY</h1>
+        <p>Communication Portal</p>
+    </div>
+    
+    <div class="main-content">
+        <div class="welcome-message">
+            <h2>Welcome to The Academy's Communication Portal</h2>
+            <p>Your central hub for team communication, announcements, and file sharing.</p>
+        </div>
+        
+        <div class="deployment-message">
+            <h3>Test Deployment Successful!</h3>
+            <p>The basic website is now working correctly. We're ready to implement the full communication portal functionality.</p>
+        </div>
+        
+        <a href="/login" class="btn-primary">Continue to Portal</a>
+    </div>
+
+    <script>
+        // Simple script to ensure the button works
+        document.addEventListener('DOMContentLoaded', function() {
+            const portalButton = document.querySelector('.btn-primary');
+            if (portalButton) {
+                portalButton.addEventListener('click', function(e) {
+                    // Allow default behavior but log for debugging
+                    console.log('Portal button clicked');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
