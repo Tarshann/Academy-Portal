@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Academy Communication Portal</title>
+  <link rel="stylesheet" href="auth_styles.css">
+  <link rel="stylesheet" href="messaging_styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="basketball-pattern"></div>
+  
+  <div id="portal-container">
+    <!-- Sidebar Navigation -->
+    <aside class="portal-sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <h1>THE ACADEMY</h1>
+        </div>
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      
+      <div class="sidebar-content">
+        <nav class="sidebar-nav">
+          <ul>
+            <li class="nav-item active" data-section="messages">
+              <a href="#messages"><i class="fas fa-comments"></i> Messages</a>
+            </li>
+            <li class="nav-item" data-section="teams">
+              <a href="#teams"><i class="fas fa-users"></i> Teams</a>
+            </li>
+            <li class="nav-item" data-section="files">
+              <a href="#files"><i class="fas fa-file-alt"></i> Files</a>
+            </li>
+            <li class="nav-item" data-section="calendar">
+              <a href="#calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            </li>
+            <li class="nav-item" data-section="settings">
+              <a href="#settings"><i class="fas fa-cog"></i> Settings</a>
+            </li>
+          </ul>
+        </nav>
+        
+        <div class="user-profile">
+          <div class="profile-image">
+            <img src="" alt="Profile" id="sidebar-profile-image">
+          </div>
+          <div class="profile-info">
+            <h3 id="sidebar-user-name"></h3>
+            <p id="sidebar-user-role"></p>
+          </div>
+          <div class="profile-actions">
+            <button id="logout-button"><i class="fas fa-sign-out-alt"></i></button>
+          </div>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="portal-main">
+      <!-- Messages Section -->
+      <section id="messages-section" class="portal-section active">
+        <div class="conversations-container">
+          <div class="section-header">
+            <h2>Conversations</h2>
+            <div class="header-actions">
+              <button class="btn-icon" id="new-conversation-btn">
+                <i class="fas fa-plus"></i>
+              </button>
+              <div class="search-container">
+                <input type="text" placeholder="Search conversations..." id="conversation-search">
+                <i class="fas fa-search"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="conversation-tabs">
+            <button class="tab-btn active" data-tab="all">All</button>
+            <button class="tab-btn" data-tab="teams">Teams</button>
+            <button class="tab-btn" data-tab="topics">Topics</button>
+            <button class="tab-btn" data-tab="direct">Direct</button>
+          </div>
+          
+          <div class="conversation-list" id="conversation-list">
+            <!-- Conversations will be loaded here -->
+            <div class="loading-spinner">
+              <div class="spinner"></div>
+              <p>Loading conversations...</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="chat-container">
+          <div class="chat-header">
+            <div class="chat-info">
+              <h3 id="current-conversation-name">Select a conversation</h3>
+              <p id="current-conversation-participants"></p>
+            </div>
+            <div class="chat-actions">
+              <button class="btn-icon" id="conversation-info-btn">
+                <i class="fas fa-info-circle"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="chat-messages" id="chat-messages">
+            <div class="empty-state">
+              <div class="empty-icon">
+                <i class="fas fa-comments"></i>
+              </div>
+              <h3>No conversation selected</h3>
+              <p>Choose a conversation from the list or start a new one</p>
+            </div>
+          </div>
+          
+          <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+              <button class="btn-icon" id="upload-media-btn">
+                <i class="fas fa-paperclip"></i>
+              </button>
+              <input type="file" id="media-upload" accept="image/*, .pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .txt" style="display: none;">
+              <div class="chat-input" id="message-input" contenteditable="true" placeholder="Type a message..."></div>
+              <button class="btn-icon" id="emoji-btn">
+                <i class="fas fa-smile"></i>
+              </button>
+              <button class="btn-primary" id="send-message-btn">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+            <div class="media-preview" id="media-preview"></div>
+          </div>
+        </div>
+        
+        <div class="conversation-info-panel" id="conversation-info-panel">
+          <div class="panel-header">
+            <h3>Conversation Info</h3>
+            <button class="btn-icon" id="close-info-panel-btn">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          
+          <div class="panel-content">
+            <div class="conversation-details">
+              <div class="detail-item">
+                <span class="detail-label">Type:</span>
+                <span class="detail-value" id="conversation-type"></span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Created by:</span>
+                <span class="detail-value" id="conversation-creator"></span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Created on:</span>
+                <span class="detail-value" id="conversation-created-date"></span>
+              </div>
+            </div>
+            
+            <div class="conversation-participants">
+              <h4>Participants <span id="participant-count"></span></h4>
+              <div class="participant-list" id="participant-list"></div>
+            </div>
+            
+            <div class="conversation-actions">
+              <button class="btn-secondary" id="add-participants-btn">
+                <i class="fas fa-user-plus"></i> Add Participants
+              </button>
+              <button class="btn-secondary" id="leave-conversation-btn">
+                <i class="fas fa-sign-out-alt"></i> Leave Conversation
+              </button>
+              <button class="btn-danger" id="archive-conversation-btn">
+                <i class="fas fa-archive"></i> Archive Conversation
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Teams Section -->
+      <section id="teams-section" class="portal-section">
+        <div class="section-header">
+          <h2>Teams</h2>
+        </div>
+        <div class="section-content">
+          <div class="empty-state">
+            <div class="empty-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>Team Management</h3>
+            <p>This section will be implemented in the next phase</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Files Section -->
+      <section id="files-section" class="portal-section">
+        <div class="section-header">
+          <h2>Files</h2>
+        </div>
+        <div class="section-content">
+          <div class="empty-state">
+            <div class="empty-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <h3>File Sharing</h3>
+            <p>This section will be implemented in the next phase</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Calendar Section -->
+      <section id="calendar-section" class="portal-section">
+        <div class="section-header">
+          <h2>Calendar</h2>
+        </div>
+        <div class="section-content">
+          <div class="empty-state">
+            <div class="empty-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h3>Event Calendar</h3>
+            <p>This section will be implemented in the next phase</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Settings Section -->
+      <section id="settings-section" class="portal-section">
+        <div class="section-header">
+          <h2>Settings</h2>
+        </div>
+        <div class="section-content">
+          <div class="settings-container">
+            <div class="settings-group">
+              <h3>Profile Settings</h3>
+              <div class="profile-settings">
+                <div class="profile-image-container">
+                  <div class="profile-image large">
+                    <img src="" alt="Profile" id="settings-profile-image">
+                    <div class="image-overlay">
+                      <i class="fas fa-camera"></i>
+                      <span>Change</span>
+                    </div>
+                  </div>
+                  <input type="file" id="profile-image-upload" accept="image/*" style="display: none;">
+                </div>
+                <div class="profile-form">
+                  <div class="form-group">
+                    <label for="settings-name">Full Name</label>
+                    <input type="text" id="settings-name" name="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="settings-email">Email Address</label>
+                    <input type="email" id="settings-email" name="email" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="settings-phone">Phone Number</label>
+                    <input type="tel" id="settings-phone" name="phone">
+                  </div>
+                  <div class="form-group">
+                    <label for="settings-address">Address</label>
+                    <input type="text" id="settings-address" name="address">
+                  </div>
+                  <div class="form-group parent-field">
+                    <label for="settings-child-name">Child's Name</label>
+                    <input type="text" id="settings-child-name" name="childName">
+                  </div>
+                  <div class="form-group">
+                    <label for="settings-shirt-size">Shirt Size</label>
+                    <select id="settings-shirt-size" name="shirtSize">
+                      <option value="">Select Size</option>
+                      <option value="YS">Youth Small</option>
+                      <option value="YM">Youth Medium</option>
+                      <option value="YL">Youth Large</option>
+                      <option value="S">Adult Small</option>
+                      <option value="M">Adult Medium</option>
+                      <option value="L">Adult Large</option>
+                      <option value="XL">Adult XL</option>
+                      <option value="XXL">Adult XXL</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <button type="button" class="btn-primary" id="save-profile-btn">Save Changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="settings-group">
+              <h3>Notification Settings</h3>
+              <div class="notification-settings">
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <h4>Email Notifications</h4>
+                    <p>Receive email notifications for new messages and mentions</p>
+                  </div>
+                  <div class="setting-control">
+                    <label class="switch">
+                      <input type="checkbox" id="email-notifications">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <h4>Push Notifications</h4>
+                    <p>Receive browser notifications for new messages and mentions</p>
+                  </div>
+                  <div class="setting-control">
+                    <label class="switch">
+                      <input type="checkbox" id="push-notifications">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <h4>SMS Notifications</h4>
+                    <p>Receive text message notifications for important announcements</p>
+                  </div>
+                  <div class="setting-control">
+                    <label class="switch">
+                      <input type="checkbox" id="sms-notifications">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="settings-group">
+              <h3>Password Settings</h3>
+              <div class="password-settings">
+                <div class="form-group">
+                  <label for="current-password">Current Password</label>
+                  <input type="password" id="current-password" name="currentPassword">
+                </div>
+                <div class="form-group">
+                  <label for="new-password">New Password</label>
+                  <input type="password" id="new-password" name="newPassword">
+                  <div class="password-strength">
+                    <div class="strength-meter"></div>
+                    <p class="strength-text">Password strength: <span>Weak</span></p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="confirm-new-password">Confirm New Password</label>
+                  <input type="password" id="confirm-new-password" name="confirmNewPassword">
+                </div>
+                <div class="form-group">
+                  <button type="button" class="btn-primary" id="change-password-btn">Change Password</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <!-- Modals -->
+  <div class="modal" id="new-conversation-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Create New Conversation</h3>
+        <button class="btn-icon" id="close-new-conversation-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="new-conversation-form">
+          <div class="form-group">
+            <label for="conversation-name">Conversation Name</label>
+            <input type="text" id="conversation-name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="conversation-type">Conversation Type</label>
+            <select id="conversation-type" name="conversationType" required>
+              <option value="topic">Topic-based Group</option>
+              <option value="team">Team-based Group</option>
+              <option value="direct">Direct Message</option>
+            </select>
+          </div>
+          <div class="form-group" id="team-select-group" style="display: none;">
+            <label for="team-select">Select Team</label>
+            <select id="team-select" name="team">
+              <option value="">Select a team</option>
+              <!-- Teams will be loaded here -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="conversation-description">Description (Optional)</label>
+            <textarea id="conversation-description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Participants</label>
+            <div class="participant-selector" id="participant-selector">
+              <!-- Users will be loaded here -->
+              <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Loading users...</p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group permissions-group" id="permissions-group">
+            <label>Permissions</label>
+            <div class="permission-item">
+              <span>Who can send messages?</span>
+              <select id="permission-send-messages" name="canSendMessages">
+                <option value="all">All participants</option>
+                <option value="admins">Admins only</option>
+                <option value="specific">Specific users</option>
+              </select>
+            </div>
+            <div class="permission-item">
+              <span>Who can add participants?</span>
+              <select id="permission-add-participants" name="canAddParticipants">
+                <option value="all">All participants</option>
+                <option value="admins">Admins only</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn-primary">Create Conversation</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="add-participants-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add Participants</h3>
+        <button class="btn-icon" id="close-add-participants-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="participant-selector" id="add-participant-selector">
+          <!-- Users will be loaded here -->
+          <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading users...</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn-primary" id="add-selected-participants-btn">Add Selected</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="image-preview-modal">
+    <div class="modal-content large">
+      <div class="modal-header">
+        <h3>Image Preview</h3>
+        <button class="btn-icon" id="close-image-preview-modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="image-preview-container">
+          <img src="" alt="Preview" id="preview-image">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="emoji-picker" id="emoji-picker">
+    <div class="emoji-categories">
+      <button class="emoji-category active" data-category="smileys">😊</button>
+      <button class="emoji-category" data-category="people">👨</button>
+      <button class="emoji-category" data-category="animals">🐶</button>
+      <button class="emoji-category" data-category="food">🍎</button>
+      <button class="emoji-category" data-category="activities">⚽</button>
+      <button class="emoji-category" data-category="travel">🚗</button>
+      <button class="emoji-category" data-category="objects">💡</button>
+      <button class="emoji-category" data-category="symbols">❤️</button>
+      <button class="emoji-category" data-category="flags">🏁</button>
+    </div>
+    <div class="emoji-search">
+      <input type="text" placeholder="Search emojis..." id="emoji-search">
+    </div>
+    <div class="emoji-list" id="emoji-list">
+      <!-- Emojis will be loaded here -->
+    </div>
+  </div>
+  
+  <div class="toast-container" id="toast-container"></div>
+  
+  <script src="auth_frontend.js" type="module"></script>
+  <script src="messaging_frontend.js" type="module"></script>
+</body>
+</html>
