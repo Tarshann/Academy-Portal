@@ -1,12 +1,13 @@
 {
   "name": "academy-portal",
   "version": "1.0.0",
-  "engines": {
-    "node": "16.x"
-  },
+  "description": "Communication portal for The Academy basketball program",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
+  },
+  "engines": {
+    "node": "16.x"
   },
   "dependencies": {
     "express": "^4.17.1"
