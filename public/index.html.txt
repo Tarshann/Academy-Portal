@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Academy Communication Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      background-color: #0a3161;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .logo {
+      max-width: 200px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      color: #fff;
+      margin: 0;
+    }
+    .content {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .message {
+      background-color: #0a3161;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>THE ACADEMY</h1>
+      <p>Communication Portal</p>
+    </div>
+  </header>
+  
+  <div class="container">
+    <div class="content">
+      <h2>Welcome to The Academy's Communication Portal</h2>
+      <p>Your central hub for team communication, announcements, and file sharing.</p>
+      
+      <div class="message">
+        <h3>Coming Soon</h3>
+        <p>The communication portal is currently being set up. Check back soon for full functionality!</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
